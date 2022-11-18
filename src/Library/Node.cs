@@ -1,37 +1,43 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System;
 
 namespace Library
 {
-    public class Node
+    public class Nodo<T>: INodo<T> //Heredamos de nuestra interfaz INode
     {
-        private int number;
+        private T content;
 
-        private List<Node> children = new List<Node>();
+        private List<Nodo<T>> children = new List<Nodo<T>>();
 
-        public int Number {
+        public T Content 
+        {
             get
             {
-                return this.number;
+                return this.content;
             }
         }
 
-        public ReadOnlyCollection<Node> Children { 
+        public ReadOnlyCollection<Nodo<T>> Children 
+        { 
             get
             {
                 return this.children.AsReadOnly();
             }
         }
 
-        public Node(int number)
+        public Nodo(T t)
         {
-            this.number = number;
+            this.content = t;
         }
 
-        public void AddChildren(Node n)
+        public void AddChildren(Nodo<T> n)
         {
             this.children.Add(n);
+        }
+
+        public void accept(IVisitor<T> visitor){
+            visitor.Visit(this);
         }
         
     }

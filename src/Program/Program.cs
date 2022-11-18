@@ -7,24 +7,43 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Node n1 = new Node(1);
-            Node n2 = new Node(2);
-            Node n3 = new Node(3);
-            Node n4 = new Node(4);
-            Node n5 = new Node(5);
-            Node n6 = new Node(6);
-            Node n7 = new Node(7);
+            Persona Pedro = new Persona("Pedro", 19);
+            Persona Maria = new Persona("Maria", 14);
+            Persona Juan = new Persona("Juan", 28);
+            Persona Jose = new Persona("Jose", 32);
+            Persona Esteban = new Persona("Esteban", 27);
+            Persona Eduardo = new Persona("Eduardo", 20);
+            Persona Julieta = new Persona("Julieta", 31);
+            Persona Agustina = new Persona("Agustina", 29);
 
-            n1.AddChildren(n2);
-            n1.AddChildren(n3);
+            Nodo<Persona> per1 = new Nodo<Persona>(Pedro);
+            Nodo<Persona> per2 = new Nodo<Persona>(Maria);
+            Nodo<Persona> per3 = new Nodo<Persona>(Juan);
+            Nodo<Persona> per4 = new Nodo<Persona>(Jose);
+            Nodo<Persona> per5 = new Nodo<Persona>(Esteban);
+            Nodo<Persona> per6 = new Nodo<Persona>(Eduardo);
+            Nodo<Persona> per7 = new Nodo<Persona>(Julieta);
+            Nodo<Persona> per8 = new Nodo<Persona>(Agustina);
 
-            n2.AddChildren(n4);
-            n2.AddChildren(n5);
+            
+            per1.AddChildren(per2);
+            per1.AddChildren(per3);
+            per2.AddChildren(per4);
+            per2.AddChildren(per5);
+            per3.AddChildren(per6);
+            per3.AddChildren(per7);
+            per3.AddChildren(per8);
 
-            n3.AddChildren(n6);
-            n3.AddChildren(n7);
+            
+            VisitorSumaEdad suma = new VisitorSumaEdad();
+            
+            System.Console.WriteLine(suma.getAgeSum(per6));
 
-            // visitar el árbol aquí
+            VisitorMayorEdad mayor = new VisitorMayorEdad();
+            System.Console.WriteLine(mayor.saberMayor(per6));
+
+            VisitorNombreLargo largo = new VisitorNombreLargo();
+            System.Console.WriteLine(largo.nombreLargo(per6));
         }
     }
 }
